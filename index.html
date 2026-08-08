@@ -401,7 +401,7 @@
   }
 </script>
 <script type="text/babel">
-const { useState, useEffect, useMemo } = React;
+const { useState, useEffect, useMemo, useRef } = React;
 const STORAGE_KEY = "ltq-financeiro-registro";
 
 const MESES = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -472,6 +472,95 @@ function useLtqData() {
   }, [data, loaded]);
 
   return [data, setData, loaded];
+}
+
+/* ---------- sincronização entre aparelhos (Firebase Realtime Database) ---------- */
+const SYNC_URL_KEY = "ltq-sync-url";
+const SYNC_CODE_KEY = "ltq-sync-code";
+
+function useSyncConfig() {
+  const [url, setUrlState] = useState("");
+  const [code, setCodeState] = useState("");
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      setUrlState(localStorage.getItem(SYNC_URL_KEY) || "");
+      setCodeState(localStorage.getItem(SYNC_CODE_KEY) || "");
+    } catch (e) { /* ignora */ }
+    setLoaded(true);
+  }, []);
+
+  function setUrl(v) {
+    setUrlState(v);
+    try { localStorage.setItem(SYNC_URL_KEY, v); } catch (e) { /* ignora */ }
+  }
+  function setCode(v) {
+    setCodeState(v);
+    try { localStorage.setItem(SYNC_CODE_KEY, v); } catch (e) { /* ignora */ }
+  }
+  return { url, code, setUrl, setCode, loaded };
+}
+
+function buildSyncUrl(config) {
+  const base = config.url.trim().replace(/\/$/, "");
+  const code = config.code.trim().replace(/[^a-zA-Z0-9_-]/g, "");
+  return `${base}/ltq-financeiro-sync/${encodeURIComponent(code)}.json`;
+}
+
+function useCloudSync(data, setData, dataLoaded, config) {
+  const [status, setStatus] = useState("off"); // off | syncing | synced | error
+  const [lastSync, setLastSync] = useState(null);
+  const pushTimer = useRef(null);
+  const readyToPush = useRef(false);
+
+  const enabled = !!(config.url && config.code);
+
+  // puxa da nuvem sempre que a configuração muda (ou ao abrir o app)
+  useEffect(() => {
+    if (!enabled || !dataLoaded) return;
+    readyToPush.current = false;
+    setStatus("syncing");
+    fetch(buildSyncUrl(config))
+      .then((r) => r.json())
+      .then((remote) => {
+        if (remote && typeof remote === "object" && (remote.receitas || remote.despesas || remote.categoriasReceita)) {
+          setData({ ...DEFAULT_DATA, ...remote });
+        }
+        readyToPush.current = true;
+        setStatus("synced");
+        setLastSync(new Date());
+      })
+      .catch(() => { readyToPush.current = true; setStatus("error"); });
+  }, [enabled, config.url, config.code, dataLoaded]); // eslint-disable-line
+
+  // envia pra nuvem quando os dados mudam (com um pequeno atraso)
+  useEffect(() => {
+    if (!enabled || !dataLoaded || !readyToPush.current) return;
+    if (pushTimer.current) clearTimeout(pushTimer.current);
+    pushTimer.current = setTimeout(() => {
+      setStatus("syncing");
+      fetch(buildSyncUrl(config), { method: "PUT", body: JSON.stringify(data) })
+        .then(() => { setStatus("synced"); setLastSync(new Date()); })
+        .catch(() => setStatus("error"));
+    }, 1200);
+    return () => clearTimeout(pushTimer.current);
+  }, [data]); // eslint-disable-line
+
+  function syncNow() {
+    if (!enabled) return;
+    setStatus("syncing");
+    fetch(buildSyncUrl(config))
+      .then((r) => r.json())
+      .then((remote) => {
+        if (remote && typeof remote === "object") setData({ ...DEFAULT_DATA, ...remote });
+        setStatus("synced");
+        setLastSync(new Date());
+      })
+      .catch(() => setStatus("error"));
+  }
+
+  return { status, lastSync, syncNow, enabled };
 }
 
 /* ---------- componentes menores ---------- */
@@ -682,6 +771,66 @@ function CategoryGroup({ title, items, onAdd, onRemove, placeholder }) {
   );
 }
 
+/* ---------- sincronização entre aparelhos ---------- */
+function SyncSettings({ config, sync }) {
+  const [url, setUrl] = useState(config.url);
+  const [code, setCode] = useState(config.code);
+
+  function salvar(e) {
+    e.preventDefault();
+    config.setUrl(url.trim());
+    config.setCode(code.trim());
+  }
+
+  const statusLabel = {
+    off: "Desligada",
+    syncing: "Sincronizando…",
+    synced: "Sincronizado",
+    error: "Erro ao sincronizar — confira o link e o código",
+  }[sync.status];
+
+  const statusColor = {
+    off: "var(--ink-faint)",
+    syncing: "var(--gold)",
+    synced: "var(--revenue)",
+    error: "var(--expense)",
+  }[sync.status];
+
+  return (
+    <div className="ltq-contas-group">
+      <p className="ltq-contas-group-title">Sincronização entre aparelhos</p>
+      <p style={{ fontSize: 12, color: "var(--ink-soft)", margin: "0 0 12px", lineHeight: 1.5 }}>
+        Configure o mesmo link e código em todos os aparelhos (celular, computador etc.) para que os lançamentos apareçam em todos automaticamente.
+      </p>
+      <form onSubmit={salvar} className="ltq-form" style={{ marginBottom: 10 }}>
+        <div className="ltq-field">
+          <label>Link do banco de dados (Firebase)</label>
+          <input type="text" placeholder="https://seu-projeto-default-rtdb.firebaseio.com" value={url} onChange={(e) => setUrl(e.target.value)} />
+        </div>
+        <div className="ltq-field">
+          <label>Código da sua conta</label>
+          <input type="text" placeholder="Ex: familialopes2026" value={code} onChange={(e) => setCode(e.target.value)} />
+        </div>
+        <button type="submit" className="ltq-btn ltq-btn-gold ltq-btn-block">Salvar configuração</button>
+      </form>
+      {sync.enabled && (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 8 }}>
+          <span style={{ fontSize: 12.5, fontWeight: 600, color: statusColor }}>● {statusLabel}</span>
+          <button type="button" className="ltq-btn ltq-btn-ghost" style={{ padding: "7px 12px", fontSize: 12 }} onClick={sync.syncNow}>Sincronizar agora</button>
+        </div>
+      )}
+      {sync.lastSync && (
+        <p style={{ fontSize: 11, color: "var(--ink-faint)", margin: "0 0 4px" }}>
+          Última sincronização: {sync.lastSync.toLocaleTimeString("pt-BR")}
+        </p>
+      )}
+      <p className="ltq-report-note">
+        Use o mesmo código em todos os aparelhos — ele funciona como uma senha simples, então não compartilhe com quem não deve ver seus dados.
+      </p>
+    </div>
+  );
+}
+
 /* ---------- aba de relatório em PDF ---------- */
 function ReportTab({ data }) {
   const [tipo, setTipo] = useState("receitas");
@@ -813,6 +962,8 @@ function App() {
   const [data, setData, loaded] = useLtqData();
   const [tab, setTab] = useState("painel");
   const [showForm, setShowForm] = useState(false);
+  const syncConfig = useSyncConfig();
+  const sync = useCloudSync(data, setData, loaded, { url: syncConfig.url, code: syncConfig.code });
 
   const monthlyData = useMemo(() => MESES.map((mes, idx) => {
     const rec = data.receitas.filter((e) => monthIndexFromISO(e.date) === idx).reduce((s, e) => s + e.value, 0);
@@ -1024,6 +1175,7 @@ function App() {
 
         {tab === "contas" && (
           <>
+            <SyncSettings config={syncConfig} sync={sync} />
             <p className="ltq-section-label">Cadastro de categorias e formas</p>
             <CategoryGroup title="Categorias de receita" items={data.categoriasReceita}
               onAdd={(v) => addCategoria("categoriasReceita", v)} onRemove={(v) => removeCategoria("categoriasReceita", v)} placeholder="Nova categoria de receita" />
