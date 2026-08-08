@@ -686,20 +686,23 @@ function CategoryGroup({ title, items, onAdd, onRemove, placeholder }) {
 function ReportTab({ data }) {
   const [tipo, setTipo] = useState("receitas");
   const [categoria, setCategoria] = useState("Todas");
+  const [forma, setForma] = useState("Todas");
   const [mes, setMes] = useState("Todos");
 
   const categoriasDisponiveis = tipo === "receitas" ? data.categoriasReceita : data.categoriasDespesa;
+  const formasDisponiveis = tipo === "receitas" ? data.formasRecebimento : data.formasPagamento;
   const entriesBase = tipo === "receitas" ? data.receitas : data.despesas;
 
-  useEffect(() => { setCategoria("Todas"); }, [tipo]);
+  useEffect(() => { setCategoria("Todas"); setForma("Todas"); }, [tipo]);
 
   const filtradas = useMemo(() => {
     return entriesBase.filter((e) => {
       if (categoria !== "Todas" && e.category !== categoria) return false;
+      if (forma !== "Todas" && e.method !== forma) return false;
       if (mes !== "Todos" && monthIndexFromISO(e.date) !== parseInt(mes, 10)) return false;
       return true;
     }).sort((a, b) => (a.date < b.date ? -1 : 1));
-  }, [entriesBase, categoria, mes]);
+  }, [entriesBase, categoria, forma, mes]);
 
   const total = filtradas.reduce((s, e) => s + e.value, 0);
 
@@ -720,7 +723,7 @@ function ReportTab({ data }) {
     doc.text("Controle Financeiro", 14, 14);
     doc.setFontSize(10.5);
     doc.setFont("helvetica", "normal");
-    doc.text(`Relatório de ${tipoLabel} · Categoria: ${categoria} · Mês: ${mes === "Todos" ? "Todos" : MESES[parseInt(mes, 10)]}`, 14, 21);
+    doc.text(`Relatório de ${tipoLabel} · Categoria: ${categoria} · Forma: ${forma} · Mês: ${mes === "Todos" ? "Todos" : MESES[parseInt(mes, 10)]}`, 14, 21);
 
     doc.setTextColor(30, 42, 56);
     doc.setFontSize(9);
@@ -751,7 +754,7 @@ function ReportTab({ data }) {
     doc.setTextColor(...corFaixa);
     doc.text(`Total: ${formatBRL(total)}`, 196, finalY + 10, { align: "right" });
 
-    const nomeArquivo = `Financeiro_${tipoLabel}_${categoria.replace(/\s+/g, "-")}_${new Date().toISOString().slice(0,10)}.pdf`;
+    const nomeArquivo = `Financeiro_${tipoLabel}_${categoria.replace(/\s+/g, "-")}_${forma.replace(/\s+/g, "-")}_${new Date().toISOString().slice(0,10)}.pdf`;
     doc.save(nomeArquivo);
   }
 
@@ -771,6 +774,13 @@ function ReportTab({ data }) {
           <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
             <option value="Todas">Todas as categorias</option>
             {categoriasDisponiveis.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+        <div className="ltq-field">
+          <label>{tipo === "receitas" ? "Forma de recebimento" : "Forma de pagamento"}</label>
+          <select value={forma} onChange={(e) => setForma(e.target.value)}>
+            <option value="Todas">Todas as formas</option>
+            {formasDisponiveis.map((f) => <option key={f} value={f}>{f}</option>)}
           </select>
         </div>
         <div className="ltq-field">
