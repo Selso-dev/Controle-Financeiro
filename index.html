@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Controle Financeiro</title>
+<meta name="theme-color" content="#16212E" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Controle Financeiro" />
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAC20lEQVR4nO3dv2pTUQDA4aS0EGwchNBFEAsOdunkqzj0ATq6+BYuBV+hUx9FcHNxcXMquIh/oMQWN106tP7S3N74fVsg5JzAL4ebyznc6d7+4QT+1dbQE2DcBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASLaHnsCKnRztLubTOx3i9dnPL9+u7nSIEbECkQiIREAkAiKZ7u0fDjj8s4M1jf7y+fnB4sfN3//1Yvvt+yd3N58V+vTxw4CjW4FIBv4bv7Zfz/fHs8niFl92uVwO+8seCysQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERDLwnui1ncqYPzyfTG5xKmNnZ2dtc4ucymDEnMq4nlMZN2QFIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJTfXXs6n+hjbtgXP306sXnx/Nln9eXvzaevPu6XDTWSWb6q+32k31y8MHk9nfq4XLq8uN2bHvGohEQCQCIhEQiYBIBEQiIBIBkWzaneiTo93FfNo/ZzGfnh7P++dsPCsQiYBIBEQiIJLp3v44dr1wP1mBSAREIiASAZEIiOR/OZWxwTzqgBFzH4jECkQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiLZPj2eDz0HRswKRCIgEgGRCIhEQCQCIvkNqI1LuTFvt4YAAAAASUVORK5CYII=" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAC20lEQVR4nO3dv2pTUQDA4aS0EGwchNBFEAsOdunkqzj0ATq6+BYuBV+hUx9FcHNxcXMquIh/oMQWN106tP7S3N74fVsg5JzAL4ebyznc6d7+4QT+1dbQE2DcBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASLaHnsCKnRztLubTOx3i9dnPL9+u7nSIEbECkQiIREAkAiKZ7u0fDjj8s4M1jf7y+fnB4sfN3//1Yvvt+yd3N58V+vTxw4CjW4FIBv4bv7Zfz/fHs8niFl92uVwO+8seCysQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERDLwnui1ncqYPzyfTG5xKmNnZ2dtc4ucymDEnMq4nlMZN2QFIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJTfXXs6n+hjbtgXP306sXnx/Nln9eXvzaevPu6XDTWSWb6q+32k31y8MHk9nfq4XLq8uN2bHvGohEQCQCIhEQiYBIBEQiIBIBkWzaneiTo93FfNo/ZzGfnh7P++dsPCsQiYBIBEQiIJLp3v44dr1wP1mBSAREIiASAZEIiOR/OZWxwTzqgBFzH4jECkQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiLZPj2eDz0HRswKRCIgEgGRCIhEQCQCIvkNqI1LuTFvt4YAAAAASUVORK5CYII=" />
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkNvbnRyb2xlIEZpbmFuY2Vpcm8iLCAic2hvcnRfbmFtZSI6ICJGaW5hbmNlaXJvIiwgInN0YXJ0X3VybCI6ICIuLyIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjMTYyMTJFIiwgInRoZW1lX2NvbG9yIjogIiMxNjIxMkUiLCAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FJQUFBRGR2dnRRQUFBQzIwbEVRVlI0bk8zZHYycFRVUURBNGFTMEVHd2NoTkJGRUFzT2R1bmtxemowQVRxNitCWXVCVitoVXg5RmNITnhjWE1xdUloL29NUVdOMTA2dFA3UzNONzRmVnNnNUp6QUw0ZWJ5em5jNmQ3KzRRVCsxZGJRRTJEY0JFUWlJQklCa1FpSVJFQWtBaUlSRUltQVNBUkVJaUFTQVpFSWlFUkFKQUlpRVJDSmdFZ0VSQ0lnRWdHUkNJaEVRQ1FDSWhFUWlZQklCRVFpSUJJQmtRaUlSRUFrQWlJUkVJbUFTQVJFSWlBU0FaRUlpRVJBSkFJaUVSQ0pnRWdFUkNJZ0VnR1JDSWhFUUNRQ0loRVFpWUJJQkVRaUlCSUJrUWlJUkVBa0FpSVJFSW1BU0xhSG5zQ0tuUnp0THViVE94M2k5ZG5QTDkrdTduU0lFYkVDa1FpSVJFQWtBaUtaN3UwZkRqajhzNE0xamY3eStmbkI0c2ZOMy8vMVl2dnQreWQzTjU4Vit2VHh3NENqVzRGSUJ2NGJ2N1pmei9mSHM4bmlGbDkydVZ3Tys4c2VDeXNRaVlCSUJFUWlJQklCa1FpSVJFQWtBaUlSRUltQVNBUkVJaUFTQVpFSWlFUkFKQUlpRVJDSmdFZ0VSREx3bnVpMW5jcVlQenlmVEc1eEttTm5aMmR0YzR1Y3ltREVuTXE0bmxNWk4yUUZJaEVRaVlCSUJFUWlJQklCa1FpSVJFQWtBaUlSRUltQVNBUkVJaUFTQVpFSWlFUkFKQUlpRVJDSlRmWFhzNm4raGpidGdYUDMwNnNYbngvTmxuOWVYdnphZXZQdTZYRFRXU1diNnErMzJrMzF5OE1IazluZnE0WExxOHVOMmJIdkdvaEVRQ1FDSWhFUWlZQklCRVFpSUJJQmtXemFuZWlUbzkzRmZOby9aekdmbmg3UCsrZHNQQ3NRaVlCSUJFUWlJSkxwM3Y0NGRyMXdQMW1CU0FSRUlpQVNBWkVJaU9SL09aV3h3VHpxZ0JGekg0akVDa1FpSUJJQmtRaUlSRUFrQWlJUkVJbUFTQVJFSWlBU0FaRUlpRVJBSkFJaUVSQ0pnRWdFUkNJZ0VnR1JDSWhFUUNRQ0loRVFpWUJJQkVRaUlCSUJrUWlJUkVBa0FpSVJFSW1BU0FSRUlpQVNBWkVJaUVSQUpBSWlFUkNKZ0VnRVJDSWdFZ0dSQ0loRVFDUUNJaEVRaVlCSUJFUWlJQklCa1FpSVJFQWtBaUxaUGoyZUR6MEhSc3dLUkNJZ0VnR1JDSWhFUUNRQ0l2a05xSTFMdVRGdnQ0WUFBQUFBU1VWT1JLNUNZSUk9IiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkgbWFza2FibGUifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FJQUFBQjdHa090QUFBSWlrbEVRVlI0bk8zZE1XcmtkUnlINGYvRTJUVWtzZGxpd2NiZG1Dd3lUVG9oVi9BSzF1c1I5QUsyRm51RXhjNkRXSWhkQ2dkTTBMU0NwSWhrMlNBa25pQVFkT0p2TXUvejFCUDRCQ2E4Zk9jUGs5bnovYU1KZ0o2dDBRTUFHRU1BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaTVxTUg4R2k4ZmIyM05SczlZZzE4L2NPN1B5NXZScStBRlhBQkFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJQa3VvQlU3WEJ5Tm52QlFadE52b3llc2hSY0huMzMwL3Nub0ZWRm55NVBSRXphS0N3QWd5Z1hBZlgzNzQ2Zi81Y2UzNXpmZkhKK3ZhTXUvOStiblR5NnZ2ZTFobWx3QUFGa0NBQkRsRmw0eEQ2bnVzdk4wTmgzdmpsNHhuWjh1TDY1dVI2K0F0ZUFDQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBS0FFQWlCSUFnQ2dCQUlnU0FJQW9BUUNJRWdDQUtBRUFpQklBZ0NnQkFJZ1NBSUFvQVFDSUVnQ0FLQUVBaUJJQWdDZ0JBSWdTQUlBb0FRQ0lFZ0NBcVBub0Fadm1jSEUwZXNLYTJwN2ZUTlA1NkJYVHkxZUxaOWZlOW8vVjJmSms5SVNONGdJQWlCSUFnQ2dCQUlnU0FJQW9UOE5XekVPcXUrdzhuVTNIdTZOWFRPZW55NHVyMjlFcllDMjRBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvZ1FBSUVvQUFLSUVBQ0JLQUFDaUJBQWdTZ0FBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW91YWpCMnlhdzhYUjZBbHJhbnQrTTAzbm8xZE1MMTh0bmwxNzJ6OVdaOHVUMFJNMmlyOEVlSlErLy9qeWk0TS83Ly82NzM1NjhlN3ZEeDV1RDQrUmo0QUFvZ1FBSUVvQUFLSThBMWd4RDZudXN2TjBOaDN2amw0eG5aOHVMNjV1UjY5WWdmMnRKOVBCaC9kLy9lKy8vdkxYKzAzNHhWa2hGd0JBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVUTlJ3K0EvOVdiTDNkSFQ0QjE0UUlBaUhJQmNGOXZYKzl0elVhUEFGYkhCUUFRSlFBQVVRSUFFQ1VBQUZFQ0FCQWxBQUJSQWdBUUpRQUFVUUlBRUNVQUFGRUNBQkFsQUFCUkFnQVFOWHUrZnpSNkF3QUR1QUFBb2dRQUlFb0FBS0lFQUNCS0FBQ2lCQUFnU2dBQW9nUUFJRW9BQUtJRUFDQktBQUNpQkFBZ1NnQUFvdWFqQjJ5YXc0VnZWNFdIY3JZOEdUMWhvN2dBQUtJRUFDQktBQUNpQkFBZ3lyK0VCSWh5QVFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUUpRQUFFUUpBRUNVQUFCRUNRQkFsQUFBUk0yLy8ycHY5QVlBQm5BQkFFUUpBRUNVQUFCRUNRQkFsQUFBUkFrQVFKUUFBRVFKQUVDVUFBQkVDUUJBbEFBQVJBa0FRSlFBQUVRSkFFQ1VBQUJFQ1FCQWxBQUFSQWtBUU5RL095NVBubS9wQXVvQUFBQUFTVVZPUks1Q1lJST0iLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSJ9XX0=" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<style>
+  html, body { margin:0; padding:0; background:#0f1620; }
+  #ltq-install-tip {
+    max-width: 430px; margin: 0 auto; background:#F1F3EF; color:#1E2A38;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 8px 16px;
+    text-align:center; border-bottom:1px solid #DDE3DF; display:none;
+  }
+  .ltq-app {
+  --paper: #F1F3EF;
+  --paper-card: #FFFFFF;
+  --ink: #1E2A38;
+  --ink-soft: #64748A;
+  --ink-faint: #9AA6B2;
+  --line: #DDE3DF;
+  --line-strong: #C7CFC9;
+  --revenue: #2F6F5E;
+  --revenue-soft: #E3EFEA;
+  --expense: #A6443D;
+  --expense-soft: #F5E7E3;
+  --gold: #B8863A;
+  --gold-soft: #F3E9D3;
+  --navy: #16212E;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 0 40px rgba(20,30,40,0.35);
+}
+.ltq-app * { box-sizing: border-box; }
+.ltq-header {
+  background: var(--navy);
+  color: #F1F3EF;
+  padding: 22px 20px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 3px solid var(--gold);
+}
+.ltq-header-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B7C4CE;
+  margin: 0 0 2px;
+}
+.ltq-header-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.ltq-content {
+  flex: 1;
+  padding: 18px 16px 100px;
+  overflow-y: auto;
+}
+.ltq-section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ltq-section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+}
+.ltq-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.ltq-card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 14px 12px;
+  position: relative;
+}
+.ltq-card-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin: 0 0 6px;
+}
+.ltq-card-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 21px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.ltq-card-revenue { border-top: 3px solid var(--revenue); }
+.ltq-card-revenue .ltq-card-value { color: var(--revenue); }
+.ltq-card-expense { border-top: 3px solid var(--expense); }
+.ltq-card-expense .ltq-card-value { color: var(--expense); }
+.ltq-card-profit { border-top: 3px solid var(--gold); }
+.ltq-card-profit .ltq-card-value { color: var(--navy); }
+.ltq-chart-card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 10px 12px;
+  margin-bottom: 20px;
+}
+.ltq-chart-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 8px 10px;
+}
+.ltq-chart-legend {
+  display: flex;
+  gap: 16px;
+  margin: 2px 0 10px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--ink-soft);
+  align-items: center;
+}
+.ltq-legend-dot {
+  width: 9px; height: 9px; border-radius: 2px; display: inline-block; margin-right: 5px;
+}
+.ltq-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.ltq-btn:active { transform: scale(0.98); }
+.ltq-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ltq-btn-revenue { background: var(--revenue); color: #fff; }
+.ltq-btn-expense { background: var(--expense); color: #fff; }
+.ltq-btn-gold { background: var(--gold); color: #fff; }
+.ltq-btn-ghost { background: transparent; color: var(--ink-soft); border: 1px dashed var(--line-strong); }
+.ltq-btn-block { width: 100%; }
+.ltq-form {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+.ltq-form-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.ltq-field { margin-bottom: 12px; }
+.ltq-field label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+}
+.ltq-field input, .ltq-field select {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  padding: 10px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: #FDFDFC;
+  color: var(--ink);
+  outline: none;
+}
+.ltq-field input:focus, .ltq-field select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-soft);
+}
+.ltq-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ltq-ledger {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  border-left: 3px dashed var(--line-strong);
+}
+.ltq-ledger-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+.ltq-ledger-row:last-child { border-bottom: none; }
+.ltq-ledger-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  width: 44px;
+  flex-shrink: 0;
+}
+.ltq-ledger-main { flex: 1; min-width: 0; }
+.ltq-ledger-desc {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ltq-ledger-meta {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-top: 1px;
+}
+.ltq-ledger-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.ltq-ledger-del {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+  display: flex;
+}
+.ltq-ledger-del:hover { color: var(--expense); }
+.ltq-ledger-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #FAFAF8;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  border-top: 1px solid var(--line-strong);
+}
+.ltq-empty {
+  padding: 34px 20px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+.ltq-empty svg { margin-bottom: 8px; opacity: 0.5; }
+.ltq-bottomnav {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  z-index: 30;
+}
+.ltq-navtab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #8493A3;
+  padding: 10px 2px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.ltq-navtab-active { color: #F1F3EF; }
+.ltq-navtab-active::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 0 0 3px 3px;
+}
+.ltq-resumo-table { width: 100%; border-collapse: collapse; }
+.ltq-resumo-table th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: right;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.ltq-resumo-table th:first-child { text-align: left; }
+.ltq-resumo-table td {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+.ltq-resumo-table td:first-child {
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+}
+.ltq-resumo-table .col-rev { color: var(--revenue); }
+.ltq-resumo-table .col-exp { color: var(--expense); }
+.ltq-breakdown-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+.ltq-breakdown-label {
+  font-size: 12.5px; font-weight: 600; width: 108px; flex-shrink: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ltq-breakdown-bar-track { flex: 1; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.ltq-breakdown-bar-fill { height: 100%; border-radius: 4px; }
+.ltq-breakdown-value { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; width: 78px; text-align: right; flex-shrink: 0; }
+.ltq-tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; }
+.ltq-tag {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--paper-card);
+  border: 1px solid var(--line-strong); border-radius: 20px; padding: 6px 8px 6px 12px;
+  font-size: 12.5px; font-weight: 500;
+}
+.ltq-tag button {
+  background: var(--line); border: none; border-radius: 50%; width: 17px; height: 17px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); padding: 0;
+}
+.ltq-tag button:hover { background: var(--expense-soft); color: var(--expense); }
+.ltq-addcat { display: flex; gap: 8px; margin-bottom: 22px; }
+.ltq-addcat input {
+  flex: 1; font-family: 'Inter', sans-serif; font-size: 13px; padding: 9px 11px;
+  border: 1px solid var(--line-strong); border-radius: 7px; background: #FDFDFC; outline: none;
+}
+.ltq-addcat input:focus { border-color: var(--gold); }
+.ltq-addcat button {
+  background: var(--navy); color: #fff; border: none; border-radius: 7px; padding: 0 13px;
+  cursor: pointer; display: flex; align-items: center;
+}
+.ltq-contas-group { margin-bottom: 26px; }
+.ltq-contas-group-title { font-family: 'Fraunces', serif; font-size: 14.5px; font-weight: 600; margin: 0 0 10px; }
+.ltq-report-note {
+  font-size: 12px; color: var(--ink-soft); margin: 10px 2px 0; line-height: 1.5;
+}
+.ltq-report-total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 12px 14px; background: var(--gold-soft); border-radius: 8px; margin-top: 4px;
+  font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 14px; color: var(--navy);
+}
+
+</style>
+</head>
+<body>
+<div id="ltq-install-tip"></div>
+<div id="root"></div>
+<script>
+  // Dica de instalação conforme a plataforma
+  (function () {
+    var tip = document.getElementById('ltq-install-tip');
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone) return;
+    if (isIOS) {
+      tip.style.display = 'block';
+      tip.innerHTML = 'Para instalar: toque em Compartilhar <b>&#x2191;</b> e depois em "Adicionar à Tela de Início"';
+    } else {
+      tip.style.display = 'block';
+      tip.innerHTML = 'Para instalar: toque no menu <b>&#8942;</b> do navegador e depois em "Adicionar à tela inicial / Instalar app"';
+    }
+  })();
+
+  // Registra um Service Worker simples para permitir instalação e uso offline
+  // (só funciona quando o arquivo é aberto via http/https, ex: hospedado no GitHub Pages, Netlify, etc.)
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    var swCode = "self.addEventListener('install', function(e){ self.skipWaiting(); });" +
+      "self.addEventListener('activate', function(e){ self.clients.claim(); });" +
+      "self.addEventListener('fetch', function(e){ /* passthrough: cache não obrigatório para app de página única */ });";
+    var swBlob = new Blob([swCode], { type: "application/javascript" });
+    var swUrl = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swUrl).catch(function () { /* ignora se não suportado */ });
+  }
+</script>
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+const STORAGE_KEY = "ltq-financeiro-registro";
+
+const MESES = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const MESES_ABREV = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+
+const DEFAULT_DATA = {
+  categoriasReceita: ["Livros","Assessoria","Mentoria","Consultoria","Cursos Online","Palestras","Licenciamento","Royalties","Outros"],
+  categoriasDespesa: ["Aluguel","Salários","FGTS","Marketing","Impostos","Fornecedores","Material de Escritório","Software/Licenças","Energia/Água","Internet/Telefone","Manutenção","Outros"],
+  formasRecebimento: ["Dinheiro","Pix","Cartão de Crédito","Cartão de Débito","Boleto","Transferência"],
+  formasPagamento: ["Dinheiro","Pix","Cartão de Crédito","Cartão de Débito","Boleto","Transferência"],
+  receitas: [],
+  despesas: [],
+};
+
+function todayISO() { return new Date().toISOString().slice(0, 10); }
+function formatBRL(n) { return (Number(n) || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+function formatDatePt(iso) { if (!iso) return ""; const [y,m,d] = iso.split("-"); return `${d}/${m}/${y}`; }
+function monthIndexFromISO(iso) { if (!iso) return null; const p = iso.split("-"); return p.length < 2 ? null : parseInt(p[1],10) - 1; }
+function uid() { return `${Date.now()}-${Math.random().toString(36).slice(2,8)}`; }
+function addMonthsISO(iso, n) {
+  const [y, m, d] = iso.split("-").map((x) => parseInt(x, 10));
+  const total = (m - 1) + n;
+  const targetY = y + Math.floor(total / 12);
+  const targetM = ((total % 12) + 12) % 12; // 0-11
+  const lastDay = new Date(targetY, targetM + 1, 0).getDate();
+  const targetD = Math.min(d, lastDay);
+  return `${targetY}-${String(targetM + 1).padStart(2, "0")}-${String(targetD).padStart(2, "0")}`;
+}
+
+/* ---------- ícones (SVG simples, sem dependência externa) ---------- */
+function Icon({ children, size = 18, ...props }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      {children}
+    </svg>
+  );
+}
+const IconDashboard = (p) => <Icon {...p}><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></Icon>;
+const IconUp = (p) => <Icon {...p}><polyline points="3 17 9 11 13 15 21 6"/><polyline points="14 6 21 6 21 13"/></Icon>;
+const IconDown = (p) => <Icon {...p}><polyline points="3 7 9 13 13 9 21 18"/><polyline points="14 18 21 18 21 11"/></Icon>;
+const IconBars = (p) => <Icon {...p}><line x1="4" y1="20" x2="4" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="20" y1="20" x2="20" y2="14"/></Icon>;
+const IconBook = (p) => <Icon {...p}><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 4.5V19.5"/></Icon>;
+const IconFile = (p) => <Icon {...p}><path d="M6 2h9l5 5v15H6z"/><polyline points="15 2 15 7 20 7"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></Icon>;
+const IconPlus = (p) => <Icon {...p}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></Icon>;
+const IconTrash = (p) => <Icon {...p}><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></Icon>;
+const IconWallet = (p) => <Icon {...p}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></Icon>;
+const IconX = (p) => <Icon {...p}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></Icon>;
+const IconDownload = (p) => <Icon {...p}><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></Icon>;
+
+/* ---------- persistência local ---------- */
+function useLtqData() {
+  const [data, setData] = useState(DEFAULT_DATA);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) setData({ ...DEFAULT_DATA, ...JSON.parse(raw) });
+    } catch (e) { /* mantém padrão */ }
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    catch (e) { console.error("Falha ao salvar dados:", e); }
+  }, [data, loaded]);
+
+  return [data, setData, loaded];
+}
+
+/* ---------- componentes menores ---------- */
+function Card({ label, value, variant }) {
+  return (
+    <div className={`ltq-card ltq-card-${variant}`}>
+      <p className="ltq-card-label">{label}</p>
+      <p className="ltq-card-value">{formatBRL(value)}</p>
+    </div>
+  );
+}
+
+function EmptyState({ icon, text }) {
+  return <div className="ltq-empty">{icon}<div>{text}</div></div>;
+}
+
+function MonthlyBarChart({ data }) {
+  const max = Math.max(1, ...data.map((d) => Math.max(d.receitas, d.despesas)));
+  const w = 380, h = 170, padL = 6, padB = 20, padT = 6;
+  const groupW = (w - padL) / data.length;
+  const barW = Math.min(9, groupW / 2.6);
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} width="100%" style={{ overflow: "visible" }}>
+      {[0.25, 0.5, 0.75, 1].map((f) => (
+        <line key={f} x1={padL} x2={w} y1={padT + (h - padT - padB) * (1 - f)} y2={padT + (h - padT - padB) * (1 - f)} stroke="#DDE3DF" strokeDasharray="2 4" />
+      ))}
+      {data.map((d, i) => {
+        const cx = padL + groupW * i + groupW / 2;
+        const rH = (d.receitas / max) * (h - padT - padB);
+        const dH = (d.despesas / max) * (h - padT - padB);
+        const base = h - padB;
+        return (
+          <g key={d.mes}>
+            <rect x={cx - barW - 1} y={base - rH} width={barW} height={rH} fill="#2F6F5E" rx="1.5" />
+            <rect x={cx + 1} y={base - dH} width={barW} height={dH} fill="#A6443D" rx="1.5" />
+            <text x={cx} y={h - 4} fontSize="8" fontFamily="IBM Plex Mono" fill="#64748A" textAnchor="middle">{d.mesAbrev}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function EntryForm({ tipo, categorias, formas, onSubmit, onCancel }) {
+  const [date, setDate] = useState(todayISO());
+  const [categoria, setCategoria] = useState(categorias[0] || "");
+  const [forma, setForma] = useState(formas[0] || "");
+  const [descricao, setDescricao] = useState("");
+  const [valor, setValor] = useState("");
+  const [parcelado, setParcelado] = useState(false);
+  const [parcelas, setParcelas] = useState(2);
+  const [fixo, setFixo] = useState(false);
+  const [mesesFixo, setMesesFixo] = useState(12);
+  const isReceita = tipo === "receita";
+  const isCartao = forma === "Cartão de Crédito";
+
+  useEffect(() => {
+    if (!isCartao && parcelado) setParcelado(false);
+  }, [isCartao]); // eslint-disable-line
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const v = parseFloat(String(valor).replace(",", "."));
+    if (!date || !categoria || !forma || !v || v <= 0) return;
+    const base = { date, category: categoria, method: forma, description: descricao.trim() || "Sem descrição", value: v };
+    if (isCartao && parcelado && parcelas >= 2) {
+      onSubmit(base, { parcelas: parseInt(parcelas, 10) });
+    } else if (!isReceita && fixo && mesesFixo >= 1) {
+      onSubmit(base, { fixo: parseInt(mesesFixo, 10) });
+    } else {
+      onSubmit(base, null);
+    }
+    setDescricao(""); setValor(""); setParcelado(false); setFixo(false);
+  }
+
+  return (
+    <form className="ltq-form" onSubmit={handleSubmit}>
+      <p className="ltq-form-title">{isReceita ? "Nova receita" : "Nova despesa"}</p>
+      <div className="ltq-field-row">
+        <div className="ltq-field">
+          <label>Data</label>
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+        </div>
+        <div className="ltq-field">
+          <label>Valor (R$){isCartao && parcelado ? " total" : ""}</label>
+          <input type="number" step="0.01" min="0.01" placeholder="0,00" value={valor} onChange={(e) => setValor(e.target.value)} required />
+        </div>
+      </div>
+      <div className="ltq-field">
+        <label>Categoria</label>
+        <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+          {categorias.map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+      <div className="ltq-field">
+        <label>{isReceita ? "Forma de recebimento" : "Forma de pagamento"}</label>
+        <select value={forma} onChange={(e) => setForma(e.target.value)}>
+          {formas.map((f) => <option key={f} value={f}>{f}</option>)}
+        </select>
+      </div>
+      <div className="ltq-field">
+        <label>Descrição</label>
+        <input type="text" placeholder="Ex: Venda avulsa, cliente XYZ..." value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+      </div>
+
+      {isCartao && (
+        <div className="ltq-field" style={{ background: "#FAFAF8", border: "1px dashed var(--line-strong)", borderRadius: 8, padding: 10 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginBottom: parcelado ? 10 : 0 }}>
+            <input type="checkbox" style={{ width: "auto" }} checked={parcelado} onChange={(e) => { setParcelado(e.target.checked); if (e.target.checked) setFixo(false); }} />
+            <span style={{ textTransform: "none", fontSize: 12.5, letterSpacing: 0 }}>Compra parcelada no cartão</span>
+          </label>
+          {parcelado && (
+            <>
+              <label>Número de parcelas</label>
+              <select value={parcelas} onChange={(e) => setParcelas(e.target.value)}>
+                {Array.from({ length: 23 }, (_, i) => i + 2).map((n) => <option key={n} value={n}>{n}x</option>)}
+              </select>
+              <p style={{ fontSize: 11.5, color: "var(--ink-soft)", margin: "6px 0 0" }}>
+                O valor informado é o total da compra. Será dividido em {parcelas}x e lançado automaticamente nos meses seguintes.
+              </p>
+            </>
+          )}
+        </div>
+      )}
+
+      {!isReceita && !isCartao && (
+        <div className="ltq-field" style={{ background: "#FAFAF8", border: "1px dashed var(--line-strong)", borderRadius: 8, padding: 10 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", marginBottom: fixo ? 10 : 0 }}>
+            <input type="checkbox" style={{ width: "auto" }} checked={fixo} onChange={(e) => setFixo(e.target.checked)} />
+            <span style={{ textTransform: "none", fontSize: 12.5, letterSpacing: 0 }}>Despesa fixa (repete todo mês)</span>
+          </label>
+          {fixo && (
+            <>
+              <label>Repetir por quantos meses</label>
+              <select value={mesesFixo} onChange={(e) => setMesesFixo(e.target.value)}>
+                {[3,6,12,18,24,36].map((n) => <option key={n} value={n}>{n} meses</option>)}
+              </select>
+              <p style={{ fontSize: 11.5, color: "var(--ink-soft)", margin: "6px 0 0" }}>
+                Será lançado o mesmo valor, todo mês, a partir da data informada.
+              </p>
+            </>
+          )}
+        </div>
+      )}
+
+      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+        <button type="submit" className={`ltq-btn ${isReceita ? "ltq-btn-revenue" : "ltq-btn-expense"} ltq-btn-block`}>
+          <IconPlus size={15} /> Lançar {isReceita ? "receita" : "despesa"}
+        </button>
+        <button type="button" className="ltq-btn ltq-btn-ghost" onClick={onCancel}>Fechar</button>
+      </div>
+    </form>
+  );
+}
+
+function EntryLedger({ entries, onDelete, variant }) {
+  const sorted = [...entries].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const total = entries.reduce((s, e) => s + e.value, 0);
+  if (entries.length === 0) {
+    return <EmptyState icon={<IconWallet size={26} />} text={variant === "revenue" ? "Nenhuma receita lançada ainda." : "Nenhuma despesa lançada ainda."} />;
+  }
+  return (
+    <div className="ltq-ledger">
+      {sorted.map((e) => (
+        <div className="ltq-ledger-row" key={e.id}>
+          <span className="ltq-ledger-date">{formatDatePt(e.date).slice(0, 5)}</span>
+          <div className="ltq-ledger-main">
+            <div className="ltq-ledger-desc">{e.description}</div>
+            <div className="ltq-ledger-meta">
+              {e.category} · {e.method}
+              {e.parcela && <span style={{ color: "var(--gold)", fontWeight: 600 }}> · parcela {e.parcela.atual}/{e.parcela.total}</span>}
+              {e.fixo && <span style={{ color: "var(--gold)", fontWeight: 600 }}> · fixo {e.fixo.atual}/{e.fixo.total}</span>}
+            </div>
+          </div>
+          <span className="ltq-ledger-value" style={{ color: variant === "revenue" ? "var(--revenue)" : "var(--expense)" }}>
+            {variant === "revenue" ? "+" : "-"}{formatBRL(e.value)}
+          </span>
+          <button className="ltq-ledger-del" onClick={() => onDelete(e.id, e.groupId)} aria-label="Excluir lançamento"><IconTrash size={15} /></button>
+        </div>
+      ))}
+      <div className="ltq-ledger-total"><span>Total</span><span style={{ color: variant === "revenue" ? "var(--revenue)" : "var(--expense)" }}>{formatBRL(total)}</span></div>
+    </div>
+  );
+}
+
+function CategoryGroup({ title, items, onAdd, onRemove, placeholder }) {
+  const [val, setVal] = useState("");
+  function submit(e) {
+    e.preventDefault();
+    const v = val.trim();
+    if (!v || items.includes(v)) return;
+    onAdd(v); setVal("");
+  }
+  return (
+    <div className="ltq-contas-group">
+      <p className="ltq-contas-group-title">{title}</p>
+      <div className="ltq-tag-list">
+        {items.length === 0 && <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Nenhum item cadastrado.</span>}
+        {items.map((item) => (
+          <span className="ltq-tag" key={item}>{item}<button onClick={() => onRemove(item)} aria-label={`Remover ${item}`}><IconX size={11} /></button></span>
+        ))}
+      </div>
+      <form className="ltq-addcat" onSubmit={submit}>
+        <input type="text" placeholder={placeholder} value={val} onChange={(e) => setVal(e.target.value)} />
+        <button type="submit" aria-label="Adicionar"><IconPlus size={16} /></button>
+      </form>
+    </div>
+  );
+}
+
+/* ---------- aba de relatório em PDF ---------- */
+function ReportTab({ data }) {
+  const [tipo, setTipo] = useState("receitas");
+  const [categoria, setCategoria] = useState("Todas");
+  const [mes, setMes] = useState("Todos");
+
+  const categoriasDisponiveis = tipo === "receitas" ? data.categoriasReceita : data.categoriasDespesa;
+  const entriesBase = tipo === "receitas" ? data.receitas : data.despesas;
+
+  useEffect(() => { setCategoria("Todas"); }, [tipo]);
+
+  const filtradas = useMemo(() => {
+    return entriesBase.filter((e) => {
+      if (categoria !== "Todas" && e.category !== categoria) return false;
+      if (mes !== "Todos" && monthIndexFromISO(e.date) !== parseInt(mes, 10)) return false;
+      return true;
+    }).sort((a, b) => (a.date < b.date ? -1 : 1));
+  }, [entriesBase, categoria, mes]);
+
+  const total = filtradas.reduce((s, e) => s + e.value, 0);
+
+  function gerarPDF() {
+    if (!window.jspdf) { alert("A biblioteca de PDF ainda está carregando. Tente novamente em alguns segundos."); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const tipoLabel = tipo === "receitas" ? "Receitas" : "Despesas";
+    const corFaixa = tipo === "receitas" ? [47, 111, 94] : [166, 68, 61];
+
+    doc.setFillColor(22, 33, 46);
+    doc.rect(0, 0, 210, 28, "F");
+    doc.setFillColor(...corFaixa);
+    doc.rect(0, 28, 210, 2, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Controle Financeiro", 14, 14);
+    doc.setFontSize(10.5);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Relatório de ${tipoLabel} · Categoria: ${categoria} · Mês: ${mes === "Todos" ? "Todos" : MESES[parseInt(mes, 10)]}`, 14, 21);
+
+    doc.setTextColor(30, 42, 56);
+    doc.setFontSize(9);
+    doc.text(`Gerado em ${new Date().toLocaleDateString("pt-BR")}`, 196, 36, { align: "right" });
+
+    const rows = filtradas.map((e) => [
+      formatDatePt(e.date),
+      e.category,
+      e.method,
+      e.description,
+      formatBRL(e.value),
+    ]);
+
+    doc.autoTable({
+      startY: 40,
+      head: [["Data", "Categoria", "Forma", "Descrição", "Valor"]],
+      body: rows.length ? rows : [["-", "-", "-", "Nenhum lançamento no filtro selecionado", "-"]],
+      headStyles: { fillColor: corFaixa, textColor: 255, fontStyle: "bold", fontSize: 9 },
+      bodyStyles: { fontSize: 8.5, textColor: [30, 42, 56] },
+      alternateRowStyles: { fillColor: [244, 245, 242] },
+      columnStyles: { 4: { halign: "right" } },
+      margin: { left: 14, right: 14 },
+    });
+
+    const finalY = doc.lastAutoTable.finalY || 40;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...corFaixa);
+    doc.text(`Total: ${formatBRL(total)}`, 196, finalY + 10, { align: "right" });
+
+    const nomeArquivo = `Financeiro_${tipoLabel}_${categoria.replace(/\s+/g, "-")}_${new Date().toISOString().slice(0,10)}.pdf`;
+    doc.save(nomeArquivo);
+  }
+
+  return (
+    <>
+      <p className="ltq-section-label">Filtrar relatório</p>
+      <div className="ltq-form" style={{ marginBottom: 16 }}>
+        <div className="ltq-field">
+          <label>Tipo de lançamento</label>
+          <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
+            <option value="receitas">Receitas</option>
+            <option value="despesas">Despesas</option>
+          </select>
+        </div>
+        <div className="ltq-field">
+          <label>Categoria</label>
+          <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+            <option value="Todas">Todas as categorias</option>
+            {categoriasDisponiveis.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+        <div className="ltq-field">
+          <label>Mês</label>
+          <select value={mes} onChange={(e) => setMes(e.target.value)}>
+            <option value="Todos">Todos os meses</option>
+            {MESES.map((m, i) => <option key={m} value={i}>{m}</option>)}
+          </select>
+        </div>
+
+        <div className="ltq-report-total">
+          <span style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 12.5 }}>{filtradas.length} lançamento(s)</span>
+          <span>{formatBRL(total)}</span>
+        </div>
+
+        <button className="ltq-btn ltq-btn-gold ltq-btn-block" style={{ marginTop: 12 }} onClick={gerarPDF}>
+          <IconFile size={15} /> Gerar relatório em PDF
+        </button>
+        <p className="ltq-report-note">O PDF é gerado no seu aparelho e baixado diretamente — nenhum dado é enviado para fora do app.</p>
+      </div>
+
+      <p className="ltq-section-label">Pré-visualização</p>
+      <EntryLedger entries={filtradas} onDelete={() => {}} variant={tipo === "receitas" ? "revenue" : "expense"} />
+    </>
+  );
+}
+
+/* ---------- app principal ---------- */
+function App() {
+  const [data, setData, loaded] = useLtqData();
+  const [tab, setTab] = useState("painel");
+  const [showForm, setShowForm] = useState(false);
+
+  const monthlyData = useMemo(() => MESES.map((mes, idx) => {
+    const rec = data.receitas.filter((e) => monthIndexFromISO(e.date) === idx).reduce((s, e) => s + e.value, 0);
+    const desp = data.despesas.filter((e) => monthIndexFromISO(e.date) === idx).reduce((s, e) => s + e.value, 0);
+    return { mes, mesAbrev: MESES_ABREV[idx], receitas: rec, despesas: desp, lucro: rec - desp };
+  }), [data.receitas, data.despesas]);
+
+  const totalReceitas = useMemo(() => data.receitas.reduce((s, e) => s + e.value, 0), [data.receitas]);
+  const totalDespesas = useMemo(() => data.despesas.reduce((s, e) => s + e.value, 0), [data.despesas]);
+  const lucroTotal = totalReceitas - totalDespesas;
+
+  function addEntry(tipo, base, opts) {
+    if (opts && opts.parcelas) {
+      const n = opts.parcelas;
+      const groupId = uid();
+      const cents = Math.round(base.value * 100);
+      const each = Math.floor(cents / n);
+      const resto = cents - each * n;
+      const novas = Array.from({ length: n }, (_, i) => {
+        const centsParcela = each + (i === n - 1 ? resto : 0);
+        return {
+          id: uid(),
+          groupId,
+          date: addMonthsISO(base.date, i),
+          category: base.category,
+          method: base.method,
+          description: base.description,
+          value: centsParcela / 100,
+          parcela: { atual: i + 1, total: n },
+        };
+      });
+      setData((d) => ({ ...d, [tipo]: [...d[tipo], ...novas] }));
+    } else if (opts && opts.fixo) {
+      const n = opts.fixo;
+      const groupId = uid();
+      const novas = Array.from({ length: n }, (_, i) => ({
+        id: uid(),
+        groupId,
+        date: addMonthsISO(base.date, i),
+        category: base.category,
+        method: base.method,
+        description: base.description,
+        value: base.value,
+        fixo: { atual: i + 1, total: n },
+      }));
+      setData((d) => ({ ...d, [tipo]: [...d[tipo], ...novas] }));
+    } else {
+      setData((d) => ({ ...d, [tipo]: [...d[tipo], { id: uid(), ...base }] }));
+    }
+  }
+  function deleteEntry(tipo, id, groupId) {
+    if (groupId) {
+      const excluirGrupo = window.confirm(
+        "Este lançamento faz parte de um parcelamento ou despesa fixa.\n\nOK = excluir TODOS os lançamentos desse grupo (todas as parcelas/meses).\nCancelar = excluir apenas este lançamento."
+      );
+      if (excluirGrupo) {
+        setData((d) => ({ ...d, [tipo]: d[tipo].filter((e) => e.groupId !== groupId) }));
+        return;
+      }
+    }
+    setData((d) => ({ ...d, [tipo]: d[tipo].filter((e) => e.id !== id) }));
+  }
+  function addCategoria(key, value) { setData((d) => ({ ...d, [key]: [...d[key], value] })); }
+  function removeCategoria(key, value) { setData((d) => ({ ...d, [key]: d[key].filter((c) => c !== value) })); }
+
+  function categoryBreakdown(entries) {
+    const map = {};
+    entries.forEach((e) => { map[e.category] = (map[e.category] || 0) + e.value; });
+    return Object.entries(map).map(([k, v]) => ({ label: k, value: v })).sort((a, b) => b.value - a.value);
+  }
+  const receitaBreakdown = useMemo(() => categoryBreakdown(data.receitas), [data.receitas]);
+  const despesaBreakdown = useMemo(() => categoryBreakdown(data.despesas), [data.despesas]);
+  const formaBreakdown = useMemo(() => {
+    const map = {};
+    data.receitas.forEach((e) => { map[e.method] = (map[e.method] || 0) + e.value; });
+    return Object.entries(map).map(([k, v]) => ({ label: k, value: v })).sort((a, b) => b.value - a.value);
+  }, [data.receitas]);
+
+  if (!loaded) {
+    return <div className="ltq-app" style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
+      <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, color: "#64748A" }}>Carregando livro-razão…</span>
+    </div>;
+  }
+
+  return (
+    <div className="ltq-app">
+      <div className="ltq-header">
+        <p className="ltq-header-eyebrow">Controle Financeiro</p>
+        <p className="ltq-header-title">
+          {tab === "painel" && "Painel Principal"}
+          {tab === "receitas" && "Lançar Receitas"}
+          {tab === "despesas" && "Lançar Despesas"}
+          {tab === "resumo" && "Resumo Mensal"}
+          {tab === "relatorio" && "Relatório em PDF"}
+          {tab === "contas" && "Plano de Contas"}
+        </p>
+      </div>
+
+      <div className="ltq-content">
+        {tab === "painel" && (
+          <>
+            <p className="ltq-section-label">Totais gerais</p>
+            <div className="ltq-cards-row">
+              <Card label="Receitas" value={totalReceitas} variant="revenue" />
+              <Card label="Gastos" value={totalDespesas} variant="expense" />
+              <Card label="Lucro / Prejuízo" value={lucroTotal} variant="profit" />
+              <div className="ltq-card" style={{ borderTop: "3px solid var(--ink-faint)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <p className="ltq-card-label" style={{ marginBottom: 2 }}>Lançamentos</p>
+                <p className="ltq-card-value" style={{ fontSize: 21 }}>{data.receitas.length + data.despesas.length}</p>
+              </div>
+            </div>
+
+            <p className="ltq-section-label">Desempenho mensal</p>
+            <div className="ltq-chart-card">
+              <p className="ltq-chart-title">Receitas × Despesas</p>
+              <div className="ltq-chart-legend">
+                <span><span className="ltq-legend-dot" style={{ background: "#2F6F5E" }} />Receitas</span>
+                <span><span className="ltq-legend-dot" style={{ background: "#A6443D" }} />Despesas</span>
+              </div>
+              <MonthlyBarChart data={monthlyData} />
+            </div>
+
+            <div style={{ display: "flex", gap: 10, marginBottom: 10 }}>
+              <button className="ltq-btn ltq-btn-revenue ltq-btn-block" onClick={() => { setTab("receitas"); setShowForm(true); }}><IconPlus size={15} /> Receita</button>
+              <button className="ltq-btn ltq-btn-expense ltq-btn-block" onClick={() => { setTab("despesas"); setShowForm(true); }}><IconPlus size={15} /> Despesa</button>
+            </div>
+            <button className="ltq-btn ltq-btn-ghost ltq-btn-block" onClick={() => setTab("relatorio")}><IconFile size={15} /> Gerar relatório em PDF</button>
+          </>
+        )}
+
+        {tab === "receitas" && (
+          <>
+            {!showForm && <button className="ltq-btn ltq-btn-revenue ltq-btn-block" style={{ marginBottom: 16 }} onClick={() => setShowForm(true)}><IconPlus size={15} /> Nova receita</button>}
+            {showForm && <EntryForm tipo="receita" categorias={data.categoriasReceita} formas={data.formasRecebimento}
+              onSubmit={(entry, opts) => { addEntry("receitas", entry, opts); setShowForm(false); }} onCancel={() => setShowForm(false)} />}
+            <p className="ltq-section-label">Lançamentos</p>
+            <EntryLedger entries={data.receitas} onDelete={(id, groupId) => deleteEntry("receitas", id, groupId)} variant="revenue" />
+          </>
+        )}
+
+        {tab === "despesas" && (
+          <>
+            {!showForm && <button className="ltq-btn ltq-btn-expense ltq-btn-block" style={{ marginBottom: 16 }} onClick={() => setShowForm(true)}><IconPlus size={15} /> Nova despesa</button>}
+            {showForm && <EntryForm tipo="despesa" categorias={data.categoriasDespesa} formas={data.formasPagamento}
+              onSubmit={(entry, opts) => { addEntry("despesas", entry, opts); setShowForm(false); }} onCancel={() => setShowForm(false)} />}
+            <p className="ltq-section-label">Lançamentos</p>
+            <EntryLedger entries={data.despesas} onDelete={(id, groupId) => deleteEntry("despesas", id, groupId)} variant="expense" />
+          </>
+        )}
+
+        {tab === "resumo" && (
+          <>
+            <p className="ltq-section-label">Receitas × despesas por mês</p>
+            <div className="ltq-chart-card" style={{ padding: "10px 4px 4px" }}>
+              <table className="ltq-resumo-table">
+                <thead><tr><th>Mês</th><th>Receitas</th><th>Despesas</th><th>Lucro</th></tr></thead>
+                <tbody>
+                  {monthlyData.map((m) => (
+                    <tr key={m.mes}>
+                      <td>{m.mes}</td>
+                      <td className="col-rev">{formatBRL(m.receitas)}</td>
+                      <td className="col-exp">{formatBRL(m.despesas)}</td>
+                      <td style={{ color: m.lucro >= 0 ? "var(--revenue)" : "var(--expense)" }}>{formatBRL(m.lucro)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="ltq-section-label">Por categoria de receita</p>
+            <div className="ltq-chart-card">
+              {receitaBreakdown.length === 0 ? <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Sem lançamentos ainda.</span> :
+                receitaBreakdown.map((b) => (
+                  <div className="ltq-breakdown-row" key={b.label}>
+                    <span className="ltq-breakdown-label">{b.label}</span>
+                    <div className="ltq-breakdown-bar-track"><div className="ltq-breakdown-bar-fill" style={{ width: `${totalReceitas ? (b.value/totalReceitas)*100 : 0}%`, background: "var(--revenue)" }} /></div>
+                    <span className="ltq-breakdown-value">{formatBRL(b.value)}</span>
+                  </div>
+                ))}
+            </div>
+
+            <p className="ltq-section-label">Por categoria de despesa</p>
+            <div className="ltq-chart-card">
+              {despesaBreakdown.length === 0 ? <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Sem lançamentos ainda.</span> :
+                despesaBreakdown.map((b) => (
+                  <div className="ltq-breakdown-row" key={b.label}>
+                    <span className="ltq-breakdown-label">{b.label}</span>
+                    <div className="ltq-breakdown-bar-track"><div className="ltq-breakdown-bar-fill" style={{ width: `${totalDespesas ? (b.value/totalDespesas)*100 : 0}%`, background: "var(--expense)" }} /></div>
+                    <span className="ltq-breakdown-value">{formatBRL(b.value)}</span>
+                  </div>
+                ))}
+            </div>
+
+            <p className="ltq-section-label">Por forma de recebimento</p>
+            <div className="ltq-chart-card">
+              {formaBreakdown.length === 0 ? <span style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Sem lançamentos ainda.</span> :
+                formaBreakdown.map((b) => (
+                  <div className="ltq-breakdown-row" key={b.label}>
+                    <span className="ltq-breakdown-label">{b.label}</span>
+                    <div className="ltq-breakdown-bar-track"><div className="ltq-breakdown-bar-fill" style={{ width: `${totalReceitas ? (b.value/totalReceitas)*100 : 0}%`, background: "var(--gold)" }} /></div>
+                    <span className="ltq-breakdown-value">{formatBRL(b.value)}</span>
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+
+        {tab === "relatorio" && <ReportTab data={data} />}
+
+        {tab === "contas" && (
+          <>
+            <p className="ltq-section-label">Cadastro de categorias e formas</p>
+            <CategoryGroup title="Categorias de receita" items={data.categoriasReceita}
+              onAdd={(v) => addCategoria("categoriasReceita", v)} onRemove={(v) => removeCategoria("categoriasReceita", v)} placeholder="Nova categoria de receita" />
+            <CategoryGroup title="Categorias de despesa" items={data.categoriasDespesa}
+              onAdd={(v) => addCategoria("categoriasDespesa", v)} onRemove={(v) => removeCategoria("categoriasDespesa", v)} placeholder="Nova categoria de despesa" />
+            <CategoryGroup title="Formas de recebimento" items={data.formasRecebimento}
+              onAdd={(v) => addCategoria("formasRecebimento", v)} onRemove={(v) => removeCategoria("formasRecebimento", v)} placeholder="Nova forma de recebimento" />
+            <CategoryGroup title="Formas de pagamento" items={data.formasPagamento}
+              onAdd={(v) => addCategoria("formasPagamento", v)} onRemove={(v) => removeCategoria("formasPagamento", v)} placeholder="Nova forma de pagamento" />
+          </>
+        )}
+      </div>
+
+      <div className="ltq-bottomnav">
+        {[
+          { id: "painel", label: "Painel", Icon: IconDashboard },
+          { id: "receitas", label: "Receitas", Icon: IconUp },
+          { id: "despesas", label: "Despesas", Icon: IconDown },
+          { id: "resumo", label: "Resumo", Icon: IconBars },
+          { id: "relatorio", label: "PDF", Icon: IconFile },
+          { id: "contas", label: "Contas", Icon: IconBook },
+        ].map(({ id, label, Icon: TabIcon }) => (
+          <button key={id} className={`ltq-navtab ${tab === id ? "ltq-navtab-active" : ""}`} onClick={() => { setTab(id); setShowForm(false); }}>
+            <TabIcon size={18} />{label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+</script>
+</body>
+</html>
