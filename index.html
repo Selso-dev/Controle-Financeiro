@@ -975,6 +975,13 @@ function App() {
   const totalDespesas = useMemo(() => data.despesas.reduce((s, e) => s + e.value, 0), [data.despesas]);
   const lucroTotal = totalReceitas - totalDespesas;
 
+  const currentYM = todayISO().slice(0, 7); // "AAAA-MM"
+  const receitasMes = useMemo(() => data.receitas.filter((e) => e.date && e.date.slice(0, 7) === currentYM), [data.receitas, currentYM]);
+  const despesasMes = useMemo(() => data.despesas.filter((e) => e.date && e.date.slice(0, 7) === currentYM), [data.despesas, currentYM]);
+  const totalReceitasMes = useMemo(() => receitasMes.reduce((s, e) => s + e.value, 0), [receitasMes]);
+  const totalDespesasMes = useMemo(() => despesasMes.reduce((s, e) => s + e.value, 0), [despesasMes]);
+  const lucroMes = totalReceitasMes - totalDespesasMes;
+
   function addEntry(tipo, base, opts) {
     if (opts && opts.parcelas) {
       const n = opts.parcelas;
@@ -1065,14 +1072,14 @@ function App() {
       <div className="ltq-content">
         {tab === "painel" && (
           <>
-            <p className="ltq-section-label">Totais gerais</p>
+            <p className="ltq-section-label">{MESES[parseInt(currentYM.slice(5,7),10)-1]} · mês atual</p>
             <div className="ltq-cards-row">
-              <Card label="Receitas" value={totalReceitas} variant="revenue" />
-              <Card label="Gastos" value={totalDespesas} variant="expense" />
-              <Card label="Lucro / Prejuízo" value={lucroTotal} variant="profit" />
+              <Card label="Receitas" value={totalReceitasMes} variant="revenue" />
+              <Card label="Gastos" value={totalDespesasMes} variant="expense" />
+              <Card label="Lucro / Prejuízo" value={lucroMes} variant="profit" />
               <div className="ltq-card" style={{ borderTop: "3px solid var(--ink-faint)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <p className="ltq-card-label" style={{ marginBottom: 2 }}>Lançamentos</p>
-                <p className="ltq-card-value" style={{ fontSize: 21 }}>{data.receitas.length + data.despesas.length}</p>
+                <p className="ltq-card-label" style={{ marginBottom: 2 }}>Lançamentos no mês</p>
+                <p className="ltq-card-value" style={{ fontSize: 21 }}>{receitasMes.length + despesasMes.length}</p>
               </div>
             </div>
 
